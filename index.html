@@ -1,7 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>WAGON13</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>WAGON13</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		  <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,448 +11,126 @@
 				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 				<link rel="shortcut icon" href="/favicon.ico" />
 
-		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="manifest" href="/manifest.json">
 		<link rel="apple-touch-startup-image" 
       href="/splash-1170x2532.png" 
       media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		
-		<style>
-			/* Устанавливаем черный цвет текста для поля ввода */
-			#inputX, #inputY {
-				color: black;
-				background-color: white;
-			}
-		
-			#result, #formula, #result2, #formula2 {
-				color: rgb(255, 255, 255);
-			}
-		</style>
-		 <script>
-        document.getElementById('booking-form').addEventListener('submit', async function (e) {
-            e.preventDefault(); // Отключаем стандартное поведение формы
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container h2 {
+            text-align: center;
+        }
+        .form-container input, .form-container select, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .notification {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            margin: 20px 0;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Бронирование столика</h2>
+        <form id="bookingForm">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+            
+            <label for="phone">Телефон:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Введите ваш телефон" required>
+            
+            <label for="date">Дата бронирования:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="time">Время:</label>
+            <input type="time" id="time" name="time" required>
+            
+            <label for="guests">Количество гостей:</label>
+            <select id="guests" name="guests" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5+">5+</option>
+            </select>
+            
+            <button type="submit">Забронировать</button>
+        </form>
+    </div>
 
-            // Получаем данные из формы
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const time = document.getElementById('time').value;
-            const guests = document.getElementById('guests').value;
-            const comments = document.getElementById('comments').value;
+    <div id="notifications"></div>
 
-            // Формируем текст сообщения для Telegram
-            const message = `
-🔔 *Новый заказ на столик!*
-👤 Имя: ${name}
-📞 Телефон: ${phone}
-⏰ Время бронирования: ${time}
-👥 Количество гостей: ${guests}
-💬 Комментарии: ${comments || 'Нет'}
-`;
+   <script>
+    const bookingForm = document.getElementById('bookingForm');
+    const notificationsContainer = document.getElementById('notifications');
 
-            // Отправляем сообщение в Telegram
-            const TOKEN = '7938312389:AAGRheFhghbaTDXOyiGljB7nmKbFZFXg7hM'; // Ваш токен
-            const CHAT_ID = '7164310630'; // Ваш chat_id
-            const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+    async function sendToTelegram(message) {
+        const TOKEN = '7938312389:AAGRheFhghbaTDXOyiGljB7nmKbFZFXg7hM'; // Ваш токен
+        const CHAT_ID = '7164310630'; // Ваш chat_id
+        const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
 
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown'
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.ok) {
-                    alert('Бронирование успешно отправлено!');
-                } else {
-                    console.error('Ошибка Telegram:', data);
-                    alert('Ошибка при отправке уведомления. Проверьте консоль.');
-                }
-            } catch (error) {
-                console.error('Ошибка при отправке:', error);
-                alert('Произошла ошибка. Проверьте консоль для деталей.');
-            }
+        // Отправка POST-запроса к Telegram API
+        await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message
+            })
         });
-    </script>
-		</head>
-		<body>
-		
-	</head>
-	<body class="is-preload">
+    }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    bookingForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
 
-				<!-- Header -->
-					<header id="header">
-						
-						<div class="content">
-							<div class="inner">
-								<h1>WAGON13</h1>
-							
-							</div>
-						</div>
-						<nav>
-							<ul>
-								<li><a href="#coupe">🚈 Забронювати купе</a></li>
-								<li><a href="#wagon">🎯 Як знайти вагон</a></li>
-								<li><a href="#insta">📸INSTAGRAM</a></li>
-								
-								<!--<li><a href="#elements">Elements</a></li>-->
-							</ul>
-						</nav>
-					</header>
+        // Получаем данные из формы
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const guests = document.getElementById('guests').value;
 
-				<!-- Main -->
-					<div id="main">
+        // Генерируем текст для Telegram
+        const message = `🆕 Новый заказ!\n\n📛 Имя: ${name}\n📞 Телефон: ${phone}\n📅 Дата: ${date}\n⏰ Время: ${time}\n👥 Гостей: ${guests}`;
 
-						<!-- Intro -->
-<article id="coupe">
-						  <div class="container">
-							<h2 class="major">Забронювати купе</h2>
-							<form>
-							  <!-- Модель телефона -->
-							  <div class="form-group">
-								 <form id="booking-form">
-        <label for="name">Имя:</label>
-        <input type="text" id="name" name="name" required>
+        // Отправляем сообщение в Telegram
+        await sendToTelegram(message);
 
-        <label for="phone">Телефон:</label>
-        <input type="tel" id="phone" name="phone" required>
+        // Генерируем уведомление на сайте
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <strong>Новый заказ!</strong><br>
+            Имя: ${name}<br>
+            Телефон: ${phone}<br>
+            Дата: ${date}<br>
+            Время: ${time}<br>
+            Гостей: ${guests}
+        `;
 
-        <label for="time">Время бронирования:</label>
-        <input type="datetime-local" id="time" name="time" required>
+        notificationsContainer.appendChild(notification);
 
-        <label for="guests">Количество гостей:</label>
-        <input type="number" id="guests" name="guests" required min="1">
-
-        <label for="comments">Комментарии:</label>
-        <textarea id="comments" name="comments"></textarea>
-
-        <button type="submit">Забронировать</button>
-    </form>
-						  </div>
-						</article>
-						
-					
-
-						<!-- Work -->
-							<article id="wagon">
-							  <h2 class="major">Монобанк</h2>
-							  <label for="inputX">Введіть суму, яка повинна зайти нам: </label>
-							  <input type="number" id="inputX" step="any" oninput="calculate()"> <!-- Событие input для X -->
-							 
-							  <br><br>
-
-							  <label for="divideSelect">Оберіть кількість платежів: </label>
-							  <select id="divideSelect" onchange="calculate()">
-								<option value="3">3 Платежі</option>
-								<option value="6">6 Платежів</option>
-								<option value="10">10 Платежів</option>
-								<option value="12">12 Платежів</option>
-								<option value="15">15 Платежів</option>
-								<option value="18">18 Платежів</option>
-							  </select>
-							  <br><br>
-							  <h3><p style="color: red;" id="formula"></p></h3><!-- Показываем формулу X + процент = Y -->
-							  <center><a class="button primary" id="result" style="display:none;">На місяць: </a></center> <!-- Кнопка скрыта по умолчанию -->
-							  
-							  <hr />
-							
-							  <h2>ПриватБанк <p style="color: red;">+2%</p> </h2>
-							  <label for="inputY">Введіть суму, яка повинна зайти нам: </label>
-							  <input type="number" id="inputY" step="any" oninput="calculate()">
-							  
-							  <br><br>
-							  
-							  <label for="divideSelect2">Оберіть кількість платежів: </label>
-							  <select id="divideSelect2" onchange="calculate()">
-								<option value="3">3 Платежі</option>
-								<option value="6">6 Платежів</option>
-								<option value="10">10 Платежів</option>
-								<option value="12">12 Платежів</option>
-								<option value="15">15 Платежів</option>
-								<option value="18">18 Платежів</option>
-							  </select>
-							  <br><br>
-
-							  <h3><p style="color: red;" id="formula2"></p></h3><!-- Показываем формулу X + процент = Y -->
-							  <center><a class="button primary" id="result2" style="display:none;">На місяць: </a></center> <!-- Кнопка скрыта по умолчанию -->
-							</article>
-
-						
-						<!-- Contact -->
-							<article id="kurs">
-								<h2 class="major">Курс Валют</h2>
-								<iframe src="https://obmenka.sumy.ua/" width="100%" height="400px"></iframe>
-							</article>
-
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-
-								<section>
-									<h3 class="major">Text</h3>
-									<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-									This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-									This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
-									<hr />
-									<h2>Heading Level 2</h2>
-									<h3>Heading Level 3</h3>
-									<h4>Heading Level 4</h4>
-									<h5>Heading Level 5</h5>
-									<h6>Heading Level 6</h6>
-									<hr />
-									<h4>Blockquote</h4>
-									<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
-									<h4>Preformatted</h4>
-									<pre><code>i = 0;
-
-while (!deck.isInOrder()) {
-    print 'Iteration ' + i;
-    deck.shuffle();
-    i++;
-}
-
-print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
-								</section>
-
-								<section>
-									<h3 class="major">Lists</h3>
-
-									<h4>Unordered</h4>
-									<ul>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Alternate</h4>
-									<ul class="alt">
-										<li>Dolor pulvinar etiam.</li>
-										<li>Sagittis adipiscing.</li>
-										<li>Felis enim feugiat.</li>
-									</ul>
-
-									<h4>Ordered</h4>
-									<ol>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis viverra.</li>
-										<li>Felis enim feugiat.</li>
-										<li>Dolor pulvinar etiam.</li>
-										<li>Etiam vel felis lorem.</li>
-										<li>Felis enim et feugiat.</li>
-									</ol>
-									<h4>Icons</h4>
-									<ul class="icons">
-										<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-										<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
-									</ul>
-
-									<h4>Actions</h4>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions stacked">
-										<li><a href="#" class="button primary">Default</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Table</h3>
-									<h4>Default</h4>
-									<div class="table-wrapper">
-										<table>
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-
-									<h4>Alternate</h4>
-									<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Item One</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Two</td>
-													<td>Vis ac commodo adipiscing arcu aliquet.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Three</td>
-													<td> Morbi faucibus arcu accumsan lorem.</td>
-													<td>29.99</td>
-												</tr>
-												<tr>
-													<td>Item Four</td>
-													<td>Vitae integer tempus condimentum.</td>
-													<td>19.99</td>
-												</tr>
-												<tr>
-													<td>Item Five</td>
-													<td>Ante turpis integer aliquet porttitor.</td>
-													<td>29.99</td>
-												</tr>
-											</tbody>
-											<tfoot>
-												<tr>
-													<td colspan="2"></td>
-													<td>100.00</td>
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-								</section>
-
-								<section>
-									<h3 class="major">Buttons</h3>
-									<ul class="actions">
-										<li><a href="#" class="button primary">Primary</a></li>
-										<li><a href="#" class="button">Default</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button">Default</a></li>
-										<li><a href="#" class="button small">Small</a></li>
-									</ul>
-									<ul class="actions">
-										<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
-										<li><a href="#" class="button icon solid fa-download">Icon</a></li>
-									</ul>
-									<ul class="actions">
-										<li><span class="button primary disabled">Disabled</span></li>
-										<li><span class="button disabled">Disabled</span></li>
-									</ul>
-								</section>
-
-								<section>
-									<h3 class="major">Form</h3>
-									<form method="post" action="#">
-										<div class="fields">
-											<div class="field half">
-												<label for="demo-name">Name</label>
-												<input type="text" name="demo-name" id="demo-name" value="" placeholder="Jane Doe" />
-											</div>
-											<div class="field half">
-												<label for="demo-email">Email</label>
-												<input type="email" name="demo-email" id="demo-email" value="" placeholder="jane@untitled.tld" />
-											</div>
-											<div class="field">
-												<label for="demo-category">Category</label>
-												<select name="demo-category" id="demo-category">
-													<option value="">-</option>
-													<option value="1">Manufacturing</option>
-													<option value="1">Shipping</option>
-													<option value="1">Administration</option>
-													<option value="1">Human Resources</option>
-												</select>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-low" name="demo-priority" checked>
-												<label for="demo-priority-low">Low</label>
-											</div>
-											<div class="field half">
-												<input type="radio" id="demo-priority-high" name="demo-priority">
-												<label for="demo-priority-high">High</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-copy" name="demo-copy">
-												<label for="demo-copy">Email me a copy</label>
-											</div>
-											<div class="field half">
-												<input type="checkbox" id="demo-human" name="demo-human" checked>
-												<label for="demo-human">Not a robot</label>
-											</div>
-											<div class="field">
-												<label for="demo-message">Message</label>
-												<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send Message" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-
-							</article>
-
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">пиво,водка, турничок через часик я качок. &copy; Джейсон Стэтхем </p>
-					</footer>
-
-			</div>
-
-		<!-- BG -->
-			<div id="bg"></div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+        // Очистка формы
+        bookingForm.reset();
+    });
+</script>
+</body>
 </html>
