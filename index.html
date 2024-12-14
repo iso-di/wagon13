@@ -151,7 +151,8 @@
             /* Отступы для формы на мобильных устройствах */
             form {
                 padding: 20px;
-                margin: 10px; /* Добавляем отступы с краев экрана */
+                margin-left: 20px;  /* Добавляем отступы с левой стороны */
+                margin-right: 20px; /* Добавляем отступы с правой стороны */
             }
         }
     </style>
@@ -237,7 +238,7 @@
                     })
                 });
 
-                               const data = await response.json();
+                const data = await response.json();
 
                 if (data.ok) {
                     alert('Бронирование успешно отправлено!');
