@@ -107,8 +107,10 @@
         /* Стили для мобильных устройств */
         @media (max-width: 600px) {
             form {
-                margin: 10px auto;
+                margin: 10px;
                 padding: 15px;
+                width: calc(100% - 6mm); /* 3mm отступы слева и справа */
+                max-width: none;
             }
 
             .date-time-container {
