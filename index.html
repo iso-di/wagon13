@@ -13,10 +13,23 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
 
+    <!-- Подключаем Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <style>
-        /* Фоновое изображение */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
         .bgwagon {
-            background-image: url('bgwagon.jpg'); /* Подключаем фоновое изображение */
+            background-image: url('bgwagon.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -25,30 +38,12 @@
             left: 0;
             right: 0;
             bottom: 0;
-            z-index: -1; /* Убедимся, что фон находится позади контента */
-            transition: filter 5s ease-in-out; /* Анимация размытия */
+            z-index: -1;
+            transition: filter 5s ease-in-out;
         }
 
-        /* Фон размывается */
-        .bgwagon.bg-blur {
-            filter: blur(10px); /* Размытие фона */
-        }
-
-        /* Общие стили для страницы */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden; /* Убираем полосу прокрутки */
-            padding: 0 20px; /* Добавим отступы по бокам */
-        }
-
-        /* Заголовок с непрозрачным фоном */
         .header {
-            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон для заголовка */
+            background-color: rgba(0, 0, 0, 0.6);
             padding: 20px;
             width: 100%;
             text-align: center;
@@ -63,23 +58,21 @@
             margin: 0;
         }
 
-        /* Стили формы */
         form {
-            background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный фон формы на 30% */
+            background-color: rgba(255, 255, 255, 0.7);
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
-            box-sizing: border-box; /* Учитываем паддинги и границы в общей ширине */
-            z-index: 1; /* Убедимся, что форма находится поверх фона */
-            margin-top: 120px; /* Отступ от заголовка */
+            box-sizing: border-box;
+            margin-top: 120px;
         }
 
         label {
-            font-size: 1.2rem; /* Увеличиваем размер шрифта */
+            font-size: 1.2rem;
             margin-bottom: 10px;
-            color: #333; /* Темный цвет для названий */
+            color: #333;
         }
 
         input, textarea, button {
@@ -89,27 +82,6 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
-            transition: border-color 0.3s ease;
-            box-sizing: border-box; /* Учитываем паддинги и границы в общей ширине */
-        }
-
-        input:focus, textarea:focus {
-            border-color: #7f8c8d;
-            outline: none;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        .date-time-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .date-time-container input {
-            width: 48%; /* Каждое поле будет занимать половину ширины */
         }
 
         button {
@@ -128,66 +100,18 @@
             background-color: #1abc9c;
         }
 
-        /* Стили для кнопок для выбора даты и времени */
-        .date-time-container button {
-            padding: 12px;
-            font-size: 1.1rem;
-            background-color: #2980b9;
-            color: #fff;
-            border: none;
-            width: 100%;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .date-time-container button:hover {
-            background-color: #3498db;
-        }
-
         /* Стили для мобильных устройств */
         @media (max-width: 600px) {
-            .date-time-container {
-                flex-direction: column;
-            }
-
-            .date-time-container input {
-                width: 100%; /* Делаем поля для даты и времени шире */
-            }
-
-            /* Стилизация для кнопок выбора даты и времени */
-            .date-time-container button {
-                padding: 12px;
-                font-size: 1.1rem;
-                background-color: #2980b9;
-                color: #fff;
-                border: none;
-                width: 100%;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s ease;
-            }
-
-            .date-time-container button:hover {
-                background-color: #3498db;
-            }
-
-            button {
-                padding: 14px;
-                font-size: 1.1rem;
-            }
-
             form {
-                margin: 10px auto; /* Центрируем форму с одинаковыми отступами */
+                margin: 10px auto;
                 padding: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bgwagon"></div> <!-- Фоновое изображение с размытие -->
-    
-    <!-- Заголовок с непрозрачным фоном -->
+    <div class="bgwagon"></div>
+
     <div class="header">
         <h2>Бронирование столика</h2>
     </div>
@@ -200,20 +124,11 @@
             <label for="phone">Телефон:</label>
             <input type="tel" id="phone" name="phone" required>
 
-            <div class="date-time-container">
-                <div>
-                    <label for="date">Дата бронирования:</label>
-                    <!-- Кнопка для выбора даты -->
-                    <button type="button" onclick="document.getElementById('date').click()">Выберите дату</button>
-                    <input type="date" id="date" name="date" style="display: none;" required>
-                </div>
-                <div>
-                    <label for="time">Время бронирования:</label>
-                    <!-- Кнопка для выбора времени -->
-                    <button type="button" onclick="document.getElementById('time').click()">Выберите время</button>
-                    <input type="time" id="time" name="time" style="display: none;" required>
-                </div>
-            </div>
+            <label for="date">Дата бронирования:</label>
+            <input type="text" id="date" name="date" required placeholder="Выберите дату">
+
+            <label for="time">Время бронирования:</label>
+            <input type="text" id="time" name="time" required placeholder="Выберите время">
 
             <label for="guests">Количество гостей:</label>
             <input type="number" id="guests" name="guests" required min="1">
@@ -225,14 +140,24 @@
         </form>
     </div>
 
+    <!-- Подключаем Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Анимация размытия фона при загрузке страницы
-        window.addEventListener('load', function() {
-            document.querySelector('.bgwagon').classList.add('bg-blur');
+        // Инициализация Flatpickr для поля даты
+        flatpickr("#date", {
+            dateFormat: "Y-m-d", // Формат даты
+            minDate: "today", // Ограничение на выбор будущей даты
+        });
+
+        // Инициализация Flatpickr для поля времени
+        flatpickr("#time", {
+            enableTime: true, // Включаем время
+            noCalendar: true, // Без календаря
+            dateFormat: "H:i", // Формат времени
         });
 
         document.getElementById('booking-form').addEventListener('submit', async function (e) {
-            e.preventDefault(); // Отключаем стандартное поведение формы
+            e.preventDefault();
 
             // Получаем данные из формы
             const name = document.getElementById('name').value;
