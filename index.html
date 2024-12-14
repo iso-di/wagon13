@@ -131,7 +131,60 @@
 					</div>
 				</div>
 			</section>
+<script>
+    const bookingForm = document.getElementById('bookingForm');
+    const notificationsContainer = document.getElementById('notifications');
 
+    async function sendToTelegram(message) {
+        const TOKEN = '<TOKEN>'; // Ваш токен бота
+        const CHAT_ID = '<CHAT_ID>'; // Ваш Chat ID
+        const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+        // Отправка POST-запроса к Telegram API
+        await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: CHAT_ID,
+                text: message
+            })
+        });
+    }
+
+    bookingForm.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        // Получаем данные из формы
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const date = document.getElementById('date').value;
+        const time = document.getElementById('time').value;
+        const guests = document.getElementById('guests').value;
+
+        // Генерируем текст для Telegram
+        const message = `🆕 Новый заказ!\n\n📛 Имя: ${name}\n📞 Телефон: ${phone}\n📅 Дата: ${date}\n⏰ Время: ${time}\n👥 Гостей: ${guests}`;
+
+        // Отправляем сообщение в Telegram
+        await sendToTelegram(message);
+
+        // Генерируем уведомление на сайте
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.innerHTML = `
+            <strong>Новый заказ!</strong><br>
+            Имя: ${name}<br>
+            Телефон: ${phone}<br>
+            Дата: ${date}<br>
+            Время: ${time}<br>
+            Гостей: ${guests}
+        `;
+
+        notificationsContainer.appendChild(notification);
+
+        // Очистка формы
+        bookingForm.reset();
+    });
+</script>
 		<!-- Contact -->
 			<section id="contact" class="main style3 secondary">
 				<div class="content">
