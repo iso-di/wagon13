@@ -39,7 +39,24 @@
 							<section class="panel spotlight medium right" id="first">
 								<div class="content span-7">
 									<h2 class="major">Sed etiam aenean</h2>
-									<p>Mauris et ligula arcu. Proin dapibus convallis accumsan. Lorem maximus hendrerit orci, sit amet elementum massa hendrerit sed. Donec et ullamcorper ligula. Suspendisse amet potenti. Ut pretium libero eleifend euismod sed tristique. Quisque dictum magna risus, id ultricies justo sagittis vitae. Sed id odio tempor, porttitor elit amet, gravida hendrerit fringilla lorem ipsum dolor.</p>
+									    <form id="booking-form">
+        <label for="name">Имя:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="phone">Телефон:</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="time">Время бронирования:</label>
+        <input type="datetime-local" id="time" name="time" required>
+
+        <label for="guests">Количество гостей:</label>
+        <input type="number" id="guests" name="guests" required min="1">
+
+        <label for="comments">Комментарии:</label>
+        <textarea id="comments" name="comments"></textarea>
+
+        <button type="submit">Забронировать</button>
+    </form>
 								</div>
 								<div class="image filtered tinted" data-position="top left">
 									<img src="images/pic02.jpg" alt="" />
