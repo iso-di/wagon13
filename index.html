@@ -4,58 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Бронирование столиков</title>
-		  <meta name="apple-mobile-web-app-capable" content="yes">
-                  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-		  <meta name="apple-mobile-web-app-title" content="WAGON13">
-		  <link rel="apple-touch-icon" href="icon-192x192.png">
-				<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-				<link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WAGON13">
+    <link rel="apple-touch-icon" href="icon-192x192.png">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
 
-		<link rel="manifest" href="/manifest.json">
-		<link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
     <style>
+        /* Общие стили для страницы */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
             padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Стили формы */
         form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        input, textarea, button {
-            display: block;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-            font-size: 16px;
+            max-width: 500px;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input, textarea, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #7f8c8d;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .date-time-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .date-time-container input {
+            width: 48%; /* Each input will take half the width */
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:active {
+            background-color: #1abc9c;
+        }
+
+        /* Сделать форму адаптивной для мобильных устройств */
+        @media (max-width: 600px) {
+            .date-time-container {
+                flex-direction: column;
+            }
+
+            .date-time-container input {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-  <center><h2>Бронирование столика</h2></center>
-    <form id="booking-form">
-        <label for="name">Имя:</label>
-        <input type="text" id="name" name="name" required>
+    <div>
+        <h2>Бронирование столика</h2>
+        <form id="booking-form">
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" required>
 
-        <label for="phone">Телефон:</label>
-        <input type="tel" id="phone" name="phone" required>
+            <label for="phone">Телефон:</label>
+            <input type="tel" id="phone" name="phone" required>
 
-        <!-- Дата бронирования -->
-        <label for="date">Дата бронирования:</label>
-        <input type="date" id="date" name="date" required>
+            <div class="date-time-container">
+                <div>
+                    <label for="date">Дата бронирования:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div>
+                    <label for="time">Время бронирования:</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+            </div>
 
-        <!-- Время бронирования -->
-        <label for="time">Время бронирования:</label>
-        <input type="time" id="time" name="time" required>
+            <label for="guests">Количество гостей:</label>
+            <input type="number" id="guests" name="guests" required min="1">
 
-        <label for="guests">Количество гостей:</label>
-        <input type="number" id="guests" name="guests" required min="1">
+            <label for="comments">Комментарии:</label>
+            <textarea id="comments" name="comments"></textarea>
 
-        <label for="comments">Комментарии:</label>
-        <textarea id="comments" name="comments"></textarea>
-
-        <button type="submit">Забронировать</button>
-    </form>
+            <button type="submit">Забронировать</button>
+        </form>
+    </div>
 
     <script>
         document.getElementById('booking-form').addEventListener('submit', async function (e) {
