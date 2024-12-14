@@ -13,27 +13,6 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
     <style>
-        /* Фоновое изображение */
-        .bgwagon {
-            background-image: url('bgwagon.jpg'); /* Подключаем фоновое изображение */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1; /* Убедимся, что фон находится позади контента */
-            transition: filter 5s ease-in-out; /* Анимация размытия */
-        }
-
-        /* Фон размывается */
-        .bgwagon.bg-blur {
-            filter: blur(10px); /* Размытие фона */
-        }
-
-        /* Общие стили для страницы */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -45,10 +24,27 @@
             padding: 0 20px;
         }
 
-        /* Заголовок с непрозрачным фоном */
+        .bgwagon {
+            background-image: url('bgwagon.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            transition: filter 5s ease-in-out;
+        }
+
+        .bgwagon.bg-blur {
+            filter: blur(10px);
+        }
+
         .header {
-            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон для заголовка */
-            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px; /* Уменьшаем отступы в заголовке */
             width: 100%;
             text-align: center;
             position: absolute;
@@ -57,15 +53,14 @@
         }
 
         .header h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #fff;
             margin: 0;
         }
 
-        /* Стили формы */
         form {
-            background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный фон формы на 30% */
-            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -73,20 +68,20 @@
             box-sizing: border-box;
             margin-top: 120px;
             display: flex;
-            flex-direction: column; /* Элементы формы будут располагаться по колонке */
-            gap: 15px; /* Небольшие отступы между элементами */
+            flex-direction: column;
+            gap: 10px; /* Уменьшаем отступы между полями */
         }
 
         label {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
+            font-size: 1rem; /* Уменьшаем размер шрифта */
+            margin-bottom: 5px; /* Уменьшаем отступы */
             color: #333;
         }
 
         input, select, button {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
+            padding: 8px; /* Уменьшаем внутренние отступы */
+            margin: 5px 0; /* Уменьшаем внешние отступы */
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
@@ -113,7 +108,7 @@
         @media (max-width: 600px) {
             form {
                 margin: 10px auto;
-                padding: 20px;
+                padding: 15px; /* Уменьшаем паддинг на мобильных устройствах */
             }
 
             .date-time-container {
@@ -125,16 +120,15 @@
             }
 
             button {
-                padding: 14px;
-                font-size: 1.1rem;
+                padding: 12px;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="bgwagon"></div> <!-- Фоновое изображение с размытие -->
-    
-    <!-- Заголовок с непрозрачным фоном -->
+    <div class="bgwagon"></div>
+
     <div class="header">
         <h2>Бронирование столика</h2>
     </div>
