@@ -47,33 +47,33 @@
 
         form {
             background-color: rgba(255, 255, 255, 0.85);
-            padding: 12px; /* Уменьшены отступы */
+            padding: 10px; /* Уменьшены отступы */
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 380px; /* Уменьшаем ширину формы */
+            max-width: 320px; /* Уменьшена максимальная ширина */
             box-sizing: border-box;
-            margin: 3vh auto; /* Уменьшены отступы сверху и снизу */
+            margin: 2vh auto; /* Уменьшены отступы сверху и снизу */
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px; /* Уменьшены промежутки между полями */
             position: relative;
             z-index: 2;
         }
 
         label {
-            font-size: 1rem;
-            margin-bottom: 4px; /* Уменьшены отступы */
+            font-size: 0.9rem; /* Уменьшен размер шрифта */
+            margin-bottom: 3px; /* Уменьшены отступы */
             color: #333;
         }
 
         input, select, textarea, button {
             width: 100%;
-            padding: 10px;
-            margin: 6px 0; /* Уменьшены отступы */
+            padding: 8px; /* Уменьшены отступы внутри полей */
+            margin: 5px 0; /* Уменьшены отступы */
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Уменьшен размер шрифта */
             box-sizing: border-box;
         }
 
@@ -96,30 +96,30 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 600px) {
             form {
-                width: calc(100% - 30px); /* Отступы с каждой стороны */
-                margin: 3vh auto; /* Уменьшены отступы сверху и снизу */
-                padding: 10px;
+                width: calc(100% - 20px); /* Отступы с каждой стороны */
+                margin: 2vh auto; /* Уменьшены отступы сверху и снизу */
+                padding: 8px;
                 max-width: none;
             }
 
             label {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
 
             input, select, textarea {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             button {
-                padding: 12px;
-                font-size: 1.2rem;
+                padding: 10px;
+                font-size: 1.1rem;
             }
         }
 
         /* Для планшетов */
         @media (min-width: 601px) and (max-width: 1024px) {
             form {
-                width: 80%;
+                width: 70%;
                 margin-top: 5vh;
             }
         }
