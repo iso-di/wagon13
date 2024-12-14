@@ -19,7 +19,7 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Убираем центрирование по вертикали */
             height: 100%;
             padding: 0;
             overflow-y: scroll; /* Прокрутка всего сайта */
@@ -53,7 +53,7 @@
             width: 100%;
             max-width: 380px; /* Уменьшена максимальная ширина */
             box-sizing: border-box;
-            margin: 5vh auto; /* Уменьшены отступы сверху и снизу */
+            margin: 0; /* Убраны отступы сверху и снизу */
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -97,7 +97,7 @@
         @media (max-width: 600px) {
             form {
                 width: calc(100% - 20px); /* Отступы с каждой стороны */
-                margin: 3vh auto;
+                margin: 0; /* Убраны отступы сверху и снизу */
                 padding: 8px;
                 max-width: none;
             }
