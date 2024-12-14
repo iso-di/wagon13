@@ -3687,3 +3687,117 @@ input, select, textarea {
 			}
 
 	}
+
+/* Container for the booking form */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: rgba(46, 43, 55, 0.8); /* Slight transparent background for form */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.form-container input, 
+.form-container select, 
+.form-container button, 
+.form-container textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #2e2b37; /* Dark text color */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent input fields */
+}
+
+.form-container input:focus, 
+.form-container select:focus, 
+.form-container button:focus, 
+.form-container textarea:focus {
+    border-color: #ffe4b4; /* Focus effect with gold color */
+    box-shadow: 0 0 8px rgba(255, 228, 180, 0.7); /* Light glowing border */
+}
+
+button {
+    background-color: #726193; /* Custom background color */
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #e37b7c; /* Change color on hover */
+}
+
+button:active {
+    background-color: #ffe4b4; /* Active button color */
+}
+
+/* Typography Adjustments */
+body {
+    background-color: #2e2b37; /* Dark background for the page */
+    color: rgba(255, 255, 255, 0.85);
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+}
+
+h1 {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+h1::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 2px;
+    margin-top: 10px;
+    background-color: #ffe4b4; /* Golden separator under the header */
+    margin: 0 auto;
+}
+
+/* Form Labels */
+label {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .form-container {
+        padding: 15px;
+        max-width: 90%;
+    }
+
+    h1 {
+        font-size: 2.25rem;
+    }
+}
+
+/* Animation for the page loading effect (train theme) */
+@keyframes train-animate {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+body:before {
+    content: '🚂'; /* Train Emoji for theme */
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    animation: train-animate 5s linear infinite;
+}
