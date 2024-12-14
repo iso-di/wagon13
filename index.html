@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование столиков</title>
+    <title>Бронирование столика</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="WAGON13">
@@ -21,7 +21,7 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            padding: 0 20px;
+            padding: 0 15px; /* Уменьшены отступы */
         }
 
         .bgwagon {
@@ -44,7 +44,7 @@
 
         .header {
             background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px; /* Уменьшаем отступы в заголовке */
+            padding: 10px; /* Уменьшаем отступы */
             width: 100%;
             text-align: center;
             position: absolute;
@@ -53,14 +53,14 @@
         }
 
         .header h2 {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #fff;
             margin: 0;
         }
 
         form {
-            background-color: rgba(255, 255, 255, 0.7);
-            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
@@ -69,19 +69,19 @@
             margin-top: 120px;
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Уменьшаем отступы между полями */
+            gap: 10px; /* Уменьшены отступы между полями */
         }
 
         label {
-            font-size: 1rem; /* Уменьшаем размер шрифта */
-            margin-bottom: 5px; /* Уменьшаем отступы */
+            font-size: 1rem;
+            margin-bottom: 5px;
             color: #333;
         }
 
         input, select, button {
             width: 100%;
-            padding: 8px; /* Уменьшаем внутренние отступы */
-            margin: 5px 0; /* Уменьшаем внешние отступы */
+            padding: 8px;
+            margin: 5px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
@@ -108,7 +108,7 @@
         @media (max-width: 600px) {
             form {
                 margin: 10px auto;
-                padding: 15px; /* Уменьшаем паддинг на мобильных устройствах */
+                padding: 15px;
             }
 
             .date-time-container {
@@ -130,65 +130,73 @@
     <div class="bgwagon"></div>
 
     <div class="header">
-        <h2>Бронирование столика</h2>
+        <h2>Оцінка Trade-In</h2>
     </div>
 
     <div>
-        <form id="booking-form">
-            <label for="name">Имя:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="phone">Телефон:</label>
-            <input type="tel" id="phone" name="phone" required>
-
-            <label for="date">Дата бронирования:</label>
-            <select id="date" name="date" required>
-                <option value="">Выберите дату</option>
-                <option value="2024-12-15">15 декабря 2024</option>
-                <option value="2024-12-16">16 декабря 2024</option>
-                <option value="2024-12-17">17 декабря 2024</option>
+        <form id="trade-in-form">
+            <label for="model">Оберіть модель телефону:</label>
+            <select id="model" name="model" required>
+                <option value="">Оберіть модель</option>
+                <option value="iPhone 13">iPhone 13</option>
+                <option value="Samsung S22">Samsung S22</option>
+                <option value="Google Pixel 6">Google Pixel 6</option>
             </select>
 
-            <label for="time">Время бронирования:</label>
-            <select id="time" name="time" required>
-                <option value="">Выберите время</option>
-                <option value="18:00">18:00</option>
-                <option value="19:00">19:00</option>
-                <option value="20:00">20:00</option>
-                <option value="21:00">21:00</option>
+            <label for="memory">Оберіть обсяг пам'яті:</label>
+            <select id="memory" name="memory" required>
+                <option value="">Оберіть обсяг</option>
+                <option value="64GB">64GB</option>
+                <option value="128GB">128GB</option>
+                <option value="256GB">256GB</option>
             </select>
 
-            <label for="guests">Количество гостей:</label>
-            <input type="number" id="guests" name="guests" required min="1">
+            <label for="condition">Оберіть стан:</label>
+            <select id="condition" name="condition" required>
+                <option value="">Оберіть стан</option>
+                <option value="New">Новий</option>
+                <option value="Good">Добрий</option>
+                <option value="Used">Використаний</option>
+            </select>
 
-            <label for="comments">Комментарии:</label>
-            <textarea id="comments" name="comments"></textarea>
+            <label for="battery">Оберіть стан акумулятора:</label>
+            <select id="battery" name="battery" required>
+                <option value="">Оберіть стан</option>
+                <option value="Good">Добрий</option>
+                <option value="Poor">Поганий</option>
+            </select>
 
-            <button type="submit">Забронировать</button>
+            <label for="sim">Оберіть тип SIM-карти:</label>
+            <select id="sim" name="sim" required>
+                <option value="">Оберіть тип</option>
+                <option value="Nano SIM">Nano SIM</option>
+                <option value="Micro SIM">Micro SIM</option>
+                <option value="eSIM">eSIM</option>
+            </select>
+
+            <button type="submit">Надіслати</button>
         </form>
     </div>
 
     <script>
-        document.getElementById('booking-form').addEventListener('submit', async function (e) {
+        document.getElementById('trade-in-form').addEventListener('submit', async function (e) {
             e.preventDefault(); // Отключаем стандартное поведение формы
 
             // Получаем данные из формы
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            const guests = document.getElementById('guests').value;
-            const comments = document.getElementById('comments').value;
+            const model = document.getElementById('model').value;
+            const memory = document.getElementById('memory').value;
+            const condition = document.getElementById('condition').value;
+            const battery = document.getElementById('battery').value;
+            const sim = document.getElementById('sim').value;
 
             // Формируем текст сообщения для Telegram
             const message = `
-🔔 *Новый заказ на столик!*
-👤 Имя: ${name}
-📞 Телефон: ${phone}
-📅 Дата бронирования: ${date}
-⏰ Время бронирования: ${time}
-👥 Количество гостей: ${guests}
-💬 Комментарии: ${comments || 'Нет'}
+📱 *Оцінка Trade-In:*
+📝 Модель: ${model}
+💾 Обсяг пам'яті: ${memory}
+📉 Стан: ${condition}
+🔋 Стан акумулятора: ${battery}
+💳 Тип SIM-карти: ${sim}
 `;
 
             // Отправляем сообщение в Telegram
@@ -210,13 +218,13 @@
                 const data = await response.json();
 
                 if (data.ok) {
-                    alert('Бронирование успешно отправлено!');
+                    alert('Форма успішно відправлена!');
                 } else {
-                    console.error('Ошибка Telegram:', data);
-                    alert('Ошибка при отправке уведомления. Проверьте консоль.');
+                    console.error('Помилка Telegram:', data);
+                    alert('Помилка при відправці. Перевірте консоль.');
                 }
             } catch (error) {
-                console.error('Ошибка при отправке:', error);
+                console.error('Помилка при відправці:', error);
                 alert('Произошла ошибка. Проверьте консоль для деталей.');
             }
         });
