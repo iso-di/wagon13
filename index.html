@@ -72,6 +72,9 @@
             max-width: 500px;
             box-sizing: border-box;
             margin-top: 120px;
+            display: flex;
+            flex-direction: column; /* Элементы формы будут располагаться по колонке */
+            gap: 15px; /* Небольшие отступы между элементами */
         }
 
         label {
@@ -144,18 +147,14 @@
             <label for="phone">Телефон:</label>
             <input type="tel" id="phone" name="phone" required>
 
-            <!-- Селектор даты -->
             <label for="date">Дата бронирования:</label>
             <select id="date" name="date" required>
                 <option value="">Выберите дату</option>
-                <!-- Опции с датами (можно добавить больше, или реализовать динамическую генерацию) -->
                 <option value="2024-12-15">15 декабря 2024</option>
                 <option value="2024-12-16">16 декабря 2024</option>
                 <option value="2024-12-17">17 декабря 2024</option>
-                <!-- Можно добавить больше дат -->
             </select>
 
-            <!-- Селектор времени -->
             <label for="time">Время бронирования:</label>
             <select id="time" name="time" required>
                 <option value="">Выберите время</option>
