@@ -45,23 +45,34 @@
             overflow: hidden; /* Убираем полосу прокрутки */
         }
 
-        h2 {
-            font-size: 2rem;
+        /* Заголовок с непрозрачным фоном */
+        .header {
+            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон для заголовка */
+            padding: 20px;
+            width: 100%;
             text-align: center;
-            color: #333;
-            margin-bottom: 20px;
+            position: absolute;
+            top: 20px;
+            z-index: 1;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            color: #fff;
+            margin: 0;
         }
 
         /* Стили формы */
         form {
             background-color: rgba(255, 255, 255, 0.85); /* Полупрозрачный фон формы */
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 500px;
             box-sizing: border-box; /* Учитываем паддинги и границы в общей ширине */
             z-index: 1; /* Убедимся, что форма находится поверх фона */
+            margin-top: 80px; /* Отступ от верхней части экрана */
         }
 
         label {
@@ -137,8 +148,12 @@
 <body>
     <div class="bgwagon"></div> <!-- Фоновое изображение с размытие -->
     
-    <div>
+    <!-- Заголовок с непрозрачным фоном -->
+    <div class="header">
         <h2>Бронирование столика</h2>
+    </div>
+
+    <div>
         <form id="booking-form">
             <label for="name">Имя:</label>
             <input type="text" id="name" name="name" required>
