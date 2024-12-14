@@ -72,7 +72,7 @@
             margin: 4px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem; /* Увеличен шрифт для полей ввода */
+            font-size: 0.85rem; /* Уменьшение шрифта */
             box-sizing: border-box;
         }
 
@@ -102,16 +102,16 @@
             }
 
             label {
-                font-size: 1rem; /* Увеличен размер шрифта на мобильных */
+                font-size: 0.8rem; /* Уменьшен размер шрифта на мобильных */
             }
 
             input, select, textarea {
-                font-size: 1.1rem; /* Увеличен размер шрифта на мобильных */
+                font-size: 0.9rem;
             }
 
             button {
                 padding: 10px;
-                font-size: 1.2rem;
+                font-size: 1rem;
             }
         }
 
@@ -129,7 +129,7 @@
     <div class="bgwagon"></div> <!-- Фон с размытим -->
 
     <form id="reservation-form">
-        <label for="name">Ваше имя:</label>
+        <label for="name"><b>Ваше имя:</b></label>
         <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
 
         <label for="phone">Телефон:</label>
