@@ -24,7 +24,7 @@
             padding: 0;
             overflow: hidden;
             position: relative;
-            background-color: #f4f4f4; /* Светлый фон для контраста */
+            background-color: #f4f4f4;
         }
 
         .bgwagon {
@@ -46,31 +46,31 @@
         }
 
         form {
-            background-color: rgba(255, 255, 255, 0.85); /* Сделаем фон чуть более непрозрачным */
-            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 15px; /* Уменьшены отступы */
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px; /* Уменьшаем ширину формы */
             box-sizing: border-box;
-            margin: 10vh auto;
+            margin: 10vh auto; /* Уменьшены отступы сверху */
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
             position: relative;
             z-index: 2;
         }
 
         label {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1rem;
+            margin-bottom: 4px; /* Уменьшены отступы */
             color: #333;
         }
 
         input, select, textarea, button {
             width: 100%;
-            padding: 12px;
-            margin: 8px 0;
+            padding: 10px;
+            margin: 6px 0; /* Уменьшены отступы */
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
@@ -97,17 +97,17 @@
         @media (max-width: 600px) {
             form {
                 width: calc(100% - 30px); /* Отступы с каждой стороны */
-                margin: 10vh auto;
-                padding: 15px;
+                margin: 8vh auto;
+                padding: 10px;
                 max-width: none;
             }
 
             label {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             input, select, textarea {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
 
             button {
