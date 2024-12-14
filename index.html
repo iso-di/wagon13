@@ -20,7 +20,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Устанавливаем полную высоту экрана */
+            height: 100%;
             padding: 0;
             overflow-y: scroll; /* Прокрутка всего сайта */
             position: relative;
@@ -96,23 +96,23 @@
         /* Адаптивность для мобильных устройств */
         @media (max-width: 600px) {
             form {
-                width: calc(100% - 20px); /* Отступы с каждой стороны */
-                margin: 0; /* Убраны отступы сверху и снизу */
-                padding: 8px;
+                width: calc(100% - 30px); /* Отступы с каждой стороны */
+                margin: 0;
+                padding: 10px;
                 max-width: none;
             }
 
             label {
-                font-size: 1rem;
+                font-size: 0.85rem;
             }
 
             input, select, textarea {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             button {
                 padding: 10px;
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
         }
 
