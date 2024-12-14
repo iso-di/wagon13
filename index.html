@@ -73,7 +73,7 @@
             max-width: 500px;
             box-sizing: border-box; /* Учитываем паддинги и границы в общей ширине */
             z-index: 1; /* Убедимся, что форма находится поверх фона */
-            margin-top: 120px; /* Отступ от заголовка, чтобы форма не накладывалась на него */
+            margin-top: 120px; /* Отступ от заголовка */
         }
 
         label {
@@ -128,31 +128,41 @@
             background-color: #1abc9c;
         }
 
-        /* Сделать форму адаптивной для мобильных устройств */
+        /* Стилизация для мобильных устройств */
         @media (max-width: 600px) {
             .date-time-container {
                 flex-direction: column;
             }
 
             .date-time-container input {
-                width: 100%; /* На мобильных устройствах увеличиваем ширину поля */
+                width: 100%; /* Делаем поля для даты и времени шире */
             }
 
-            /* Для маленьких экранов мы делаем кнопку немного меньше */
+            /* Стилизация для кнопок выбора даты и времени */
+            .date-time-container button {
+                padding: 12px;
+                font-size: 1.1rem;
+                background-color: #2980b9;
+                color: #fff;
+                border: none;
+                width: 100%;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+
+            .date-time-container button:hover {
+                background-color: #3498db;
+            }
+
             button {
                 padding: 14px;
                 font-size: 1.1rem;
             }
 
-            /* Увеличиваем ширину полей даты и времени */
-            .date-time-container input {
-                width: 100%; /* Делаем ширину для даты и времени на мобильных устройствах 100% */
-            }
-
-            /* Форму теперь можно выровнять с одинаковыми отступами */
             form {
-                padding: 20px;
                 margin: 10px auto; /* Центрируем форму с одинаковыми отступами */
+                padding: 20px;
             }
         }
     </style>
@@ -176,11 +186,13 @@
             <div class="date-time-container">
                 <div>
                     <label for="date">Дата бронирования:</label>
-                    <input type="date" id="date" name="date" required>
+                    <button type="button" onclick="document.getElementById('date').click()">Выберите дату</button>
+                    <input type="date" id="date" name="date" style="display: none;" required>
                 </div>
                 <div>
                     <label for="time">Время бронирования:</label>
-                    <input type="time" id="time" name="time" required>
+                    <button type="button" onclick="document.getElementById('time').click()">Выберите время</button>
+                    <input type="time" id="time" name="time" style="display: none;" required>
                 </div>
             </div>
 
