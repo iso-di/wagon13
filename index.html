@@ -13,6 +13,8 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
 
+    <!-- Подключаем Flatpickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         /* Общие стили для страницы */
         body {
@@ -127,7 +129,7 @@
             <div class="date-time-container">
                 <div>
                     <label for="date">Дата бронирования:</label>
-                    <input type="date" id="date" name="date" required>
+                    <input type="text" id="date" name="date" required> <!-- Здесь мы применим Flatpickr -->
                 </div>
                 <div>
                     <label for="time">Время бронирования:</label>
@@ -145,7 +147,16 @@
         </form>
     </div>
 
+    <!-- Подключаем библиотеку Flatpickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
+        // Инициализируем Flatpickr на поле для выбора даты
+        flatpickr("#date", {
+            dateFormat: "Y-m-d", // Формат даты
+            locale: "ru", // Локализация для русского языка
+            minDate: "today", // Ограничиваем выбор только сегодняшней датой и в будущем
+        });
+
         document.getElementById('booking-form').addEventListener('submit', async function (e) {
             e.preventDefault(); // Отключаем стандартное поведение формы
 
