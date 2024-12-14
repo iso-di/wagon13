@@ -128,7 +128,24 @@
             background-color: #1abc9c;
         }
 
-        /* Стилизация для мобильных устройств */
+        /* Стили для кнопок для выбора даты и времени */
+        .date-time-container button {
+            padding: 12px;
+            font-size: 1.1rem;
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .date-time-container button:hover {
+            background-color: #3498db;
+        }
+
+        /* Стили для мобильных устройств */
         @media (max-width: 600px) {
             .date-time-container {
                 flex-direction: column;
@@ -186,11 +203,13 @@
             <div class="date-time-container">
                 <div>
                     <label for="date">Дата бронирования:</label>
+                    <!-- Кнопка для выбора даты -->
                     <button type="button" onclick="document.getElementById('date').click()">Выберите дату</button>
                     <input type="date" id="date" name="date" style="display: none;" required>
                 </div>
                 <div>
                     <label for="time">Время бронирования:</label>
+                    <!-- Кнопка для выбора времени -->
                     <button type="button" onclick="document.getElementById('time').click()">Выберите время</button>
                     <input type="time" id="time" name="time" style="display: none;" required>
                 </div>
