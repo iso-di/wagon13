@@ -13,6 +13,7 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
     <style>
+        /* Основные стили */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -22,6 +23,7 @@
             height: 100vh;
             padding: 0;
             overflow: hidden;
+            position: relative;
         }
 
         .bgwagon {
@@ -35,7 +37,7 @@
             right: 0;
             bottom: 0;
             z-index: -1;
-            transition: filter 5s ease-in-out;
+            transition: filter 10s ease-in-out;
         }
 
         .bgwagon.bg-blur {
@@ -66,7 +68,7 @@
             width: 100%;
             max-width: 600px;
             box-sizing: border-box;
-            margin-top: 100px;
+            margin: 10vh auto;
             display: flex;
             flex-direction: column;
             gap: 15px;
@@ -106,13 +108,13 @@
             background-color: #1abc9c;
         }
 
-        /* Стили для мобильных устройств */
+        /* Адаптивность для мобильных устройств */
         @media (max-width: 600px) {
             form {
-                width: calc(100% - 30px); /* 15px отступы с каждой стороны */
-                margin: 0;
-                max-width: none;
+                width: calc(100% - 30px); /* Отступы с каждой стороны */
+                margin: 10vh auto;
                 padding: 15px;
+                max-width: none;
             }
 
             .header h2 {
@@ -126,6 +128,14 @@
             button {
                 padding: 12px;
                 font-size: 1.2rem;
+            }
+        }
+
+        /* Для планшетов */
+        @media (min-width: 601px) and (max-width: 1024px) {
+            form {
+                width: 80%;
+                margin-top: 5vh;
             }
         }
     </style>
@@ -161,6 +171,13 @@
     </form>
 
     <script>
+        // Включение размытия фона на 10 секунд
+        window.onload = () => {
+            setTimeout(() => {
+                document.querySelector('.bgwagon').classList.add('bg-blur');
+            }, 500); // Задержка перед включением размытия
+        }
+
         document.getElementById('reservation-form').addEventListener('submit', async function (e) {
             e.preventDefault(); // Отключаем стандартное поведение формы
 
