@@ -12,11 +12,28 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
-
-    <!-- Подключаем Flatpickr CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
     <style>
+        /* Фоновое изображение */
+        .bgwagon {
+            background-image: url('bgwagon.jpg'); /* Подключаем фоновое изображение */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1; /* Убедимся, что фон находится позади контента */
+            transition: filter 5s ease-in-out; /* Анимация размытия */
+        }
+
+        /* Фон размывается */
+        .bgwagon.bg-blur {
+            filter: blur(10px); /* Размытие фона */
+        }
+
+        /* Общие стили для страницы */
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -28,22 +45,9 @@
             padding: 0 20px;
         }
 
-        .bgwagon {
-            background-image: url('bgwagon.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            transition: filter 5s ease-in-out;
-        }
-
+        /* Заголовок с непрозрачным фоном */
         .header {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный фон для заголовка */
             padding: 20px;
             width: 100%;
             text-align: center;
@@ -58,8 +62,9 @@
             margin: 0;
         }
 
+        /* Стили формы */
         form {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный фон формы на 30% */
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -75,13 +80,14 @@
             color: #333;
         }
 
-        input, textarea, button {
+        input, select, button {
             width: 100%;
             padding: 12px;
             margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            box-sizing: border-box;
         }
 
         button {
@@ -106,12 +112,29 @@
                 margin: 10px auto;
                 padding: 20px;
             }
+
+            .date-time-container {
+                flex-direction: column;
+            }
+
+            select {
+                width: 100%;
+            }
+
+            button {
+                padding: 14px;
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="bgwagon"></div>
-
+    <div class="bgwagon"></div> <!-- Фоновое изображение с размытие -->
+    
+    <!-- Заголовок с непрозрачным фоном -->
+    <div class="header">
+        <h2>Бронирование столика</h2>
+    </div>
 
     <div>
         <form id="booking-form">
@@ -121,11 +144,26 @@
             <label for="phone">Телефон:</label>
             <input type="tel" id="phone" name="phone" required>
 
+            <!-- Селектор даты -->
             <label for="date">Дата бронирования:</label>
-            <input type="text" id="date" name="date" required placeholder="Выберите дату">
+            <select id="date" name="date" required>
+                <option value="">Выберите дату</option>
+                <!-- Опции с датами (можно добавить больше, или реализовать динамическую генерацию) -->
+                <option value="2024-12-15">15 декабря 2024</option>
+                <option value="2024-12-16">16 декабря 2024</option>
+                <option value="2024-12-17">17 декабря 2024</option>
+                <!-- Можно добавить больше дат -->
+            </select>
 
+            <!-- Селектор времени -->
             <label for="time">Время бронирования:</label>
-            <input type="text" id="time" name="time" required placeholder="Выберите время">
+            <select id="time" name="time" required>
+                <option value="">Выберите время</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+                <option value="21:00">21:00</option>
+            </select>
 
             <label for="guests">Количество гостей:</label>
             <input type="number" id="guests" name="guests" required min="1">
@@ -137,24 +175,9 @@
         </form>
     </div>
 
-    <!-- Подключаем Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Инициализация Flatpickr для поля даты
-        flatpickr("#date", {
-            dateFormat: "Y-m-d", // Формат даты
-            minDate: "today", // Ограничение на выбор будущей даты
-        });
-
-        // Инициализация Flatpickr для поля времени
-        flatpickr("#time", {
-            enableTime: true, // Включаем время
-            noCalendar: true, // Без календаря
-            dateFormat: "H:i", // Формат времени
-        });
-
         document.getElementById('booking-form').addEventListener('submit', async function (e) {
-            e.preventDefault();
+            e.preventDefault(); // Отключаем стандартное поведение формы
 
             // Получаем данные из формы
             const name = document.getElementById('name').value;
