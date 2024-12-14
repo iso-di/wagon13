@@ -46,33 +46,33 @@
 
         form {
             background-color: rgba(255, 255, 255, 0.85);
-            padding: 20px;
+            padding: 10px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 380px; /* Ширина формы */
+            max-width: 320px; /* Уменьшена максимальная ширина */
             box-sizing: border-box;
             margin: 0; /* Убраны отступы сверху и снизу */
             display: flex;
             flex-direction: column;
-            gap: 12px; /* Промежутки между полями */
+            gap: 8px; /* Уменьшены промежутки между полями */
             position: relative;
             z-index: 2;
         }
 
         label {
-            font-size: 1rem;
-            margin-bottom: 6px;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
             color: #333;
         }
 
         input, select, textarea, button {
             width: 100%;
-            padding: 12px;
-            margin: 6px 0;
+            padding: 8px;
+            margin: 4px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 0.85rem; /* Уменьшение шрифта */
             box-sizing: border-box;
         }
 
@@ -97,12 +97,12 @@
             form {
                 width: 100%;
                 max-width: 90%; /* Ширина формы для мобильных */
-                margin: 0; /* Убраны отступы сверху и снизу */
-                padding: 15px;
+                margin: 0;
+                padding: 10px;
             }
 
             label {
-                font-size: 0.9rem;
+                font-size: 0.8rem; /* Уменьшен размер шрифта на мобильных */
             }
 
             input, select, textarea {
@@ -110,7 +110,7 @@
             }
 
             button {
-                padding: 12px;
+                padding: 10px;
                 font-size: 1rem;
             }
         }
@@ -145,7 +145,7 @@
         <input type="number" id="guests" name="guests" required min="1" placeholder="Количество гостей">
 
         <label for="comments">Комментарии:</label>
-        <textarea id="comments" name="comments" rows="4" placeholder="Ваши комментарии..."></textarea>
+        <textarea id="comments" name="comments" rows="3" placeholder="Ваши комментарии..."></textarea>
 
         <button type="submit">Забронировать</button>
     </form>
