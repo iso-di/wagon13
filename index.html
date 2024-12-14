@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронювання купе</title>
+    <title>Бронирование столиков</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="WAGON13">
@@ -14,25 +14,35 @@
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
 
     <style>
-        /* Общие стили для страницы */
-        body {
-            font-family: 'Arial', sans-serif;
+        /* Фоновое изображение */
+        .bgwagon {
             background-image: url('bgwagon.jpg'); /* Подключаем фоновое изображение */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1; /* Убедимся, что фон находится позади контента */
+            transition: filter 5s ease-in-out; /* Анимация размытия */
+        }
+
+        /* Фон размывается */
+        .bgwagon.bg-blur {
+            filter: blur(10px); /* Размытие фона */
+        }
+
+        /* Общие стили для страницы */
+        body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            transition: filter 5s ease-in-out; /* Анимация размытия */
-        }
-
-        /* Анимация размытия фона */
-        body.bg-blur {
-            filter: blur(10px); /* Размытие фона */
+            overflow: hidden; /* Убираем полосу прокрутки */
         }
 
         h2 {
@@ -51,6 +61,7 @@
             width: 100%;
             max-width: 500px;
             box-sizing: border-box; /* Учитываем паддинги и границы в общей ширине */
+            z-index: 1; /* Убедимся, что форма находится поверх фона */
         }
 
         label {
@@ -124,10 +135,12 @@
     </style>
 </head>
 <body>
+    <div class="bgwagon"></div> <!-- Фоновое изображение с размытие -->
+    
     <div>
-        <h2>Бронювання купе</h2>
+        <h2>Бронирование столика</h2>
         <form id="booking-form">
-            <label for="name">Імя:</label>
+            <label for="name">Имя:</label>
             <input type="text" id="name" name="name" required>
 
             <label for="phone">Телефон:</label>
@@ -135,29 +148,29 @@
 
             <div class="date-time-container">
                 <div>
-                    <label for="date">Дата бронювання:</label>
+                    <label for="date">Дата бронирования:</label>
                     <input type="date" id="date" name="date" required>
                 </div>
                 <div>
-                    <label for="time">Час бронювання:</label>
+                    <label for="time">Время бронирования:</label>
                     <input type="time" id="time" name="time" required>
                 </div>
             </div>
 
-            <label for="guests">Кількість пасажирів:</label>
+            <label for="guests">Количество гостей:</label>
             <input type="number" id="guests" name="guests" required min="1">
 
-            <label for="comments">Повідомлення для провідника:</label>
+            <label for="comments">Комментарии:</label>
             <textarea id="comments" name="comments"></textarea>
 
-            <button type="submit">Забронювати</button>
+            <button type="submit">Забронировать</button>
         </form>
     </div>
 
     <script>
         // Анимация размытия фона при загрузке страницы
         window.addEventListener('load', function() {
-            document.body.classList.add('bg-blur');
+            document.querySelector('.bgwagon').classList.add('bg-blur');
         });
 
         document.getElementById('booking-form').addEventListener('submit', async function (e) {
@@ -173,13 +186,13 @@
 
             // Формируем текст сообщения для Telegram
             const message = `
-🔔 *Нова броню купе!*
-👤 Імя: ${name}
+🔔 *Новый заказ на столик!*
+👤 Имя: ${name}
 📞 Телефон: ${phone}
-📅 Дата бронювання: ${date}
-⏰ Час бронювання: ${time}
-👥 Кількість пасажирів: ${guests}
-💬 Коментар: ${comments || 'Нет'}
+📅 Дата бронирования: ${date}
+⏰ Время бронирования: ${time}
+👥 Количество гостей: ${guests}
+💬 Комментарии: ${comments || 'Нет'}
 `;
 
             // Отправляем сообщение в Telegram
@@ -201,7 +214,7 @@
                 const data = await response.json();
 
                 if (data.ok) {
-                    alert('Бронювання успішне!');
+                    alert('Бронирование успешно отправлено!');
                 } else {
                     console.error('Ошибка Telegram:', data);
                     alert('Ошибка при отправке уведомления. Проверьте консоль.');
