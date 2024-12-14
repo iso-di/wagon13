@@ -13,8 +13,6 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-startup-image" href="/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" />
 
-    <!-- Подключаем Flatpickr -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         /* Общие стили для страницы */
         body {
@@ -118,7 +116,7 @@
 </head>
 <body>
     <div>
-        <h2>Бронювання купе</h2>
+        <h2>Бронирование столика</h2>
         <form id="booking-form">
             <label for="name">Имя:</label>
             <input type="text" id="name" name="name" required>
@@ -129,11 +127,11 @@
             <div class="date-time-container">
                 <div>
                     <label for="date">Дата бронирования:</label>
-                    <input type="text" id="date" name="date" required> <!-- Здесь мы применим Flatpickr -->
+                    <input type="text" id="date" name="date" placeholder="Выберите дату" readonly required> <!-- Дата в стиле текстового поля -->
                 </div>
                 <div>
                     <label for="time">Время бронирования:</label>
-                    <input type="time" id="time" name="time" required>
+                    <input type="text" id="time" name="time" placeholder="Выберите время" readonly required> <!-- Время в стиле текстового поля -->
                 </div>
             </div>
 
@@ -147,14 +145,25 @@
         </form>
     </div>
 
-    <!-- Подключаем библиотеку Flatpickr -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        // Инициализируем Flatpickr на поле для выбора даты
-        flatpickr("#date", {
-            dateFormat: "Y-m-d", // Формат даты
-            locale: "ru", // Локализация для русского языка
-            minDate: "today", // Ограничиваем выбор только сегодняшней датой и в будущем
+        // Инициализация выбора даты с помощью встроенной функции браузера
+        document.getElementById('date').addEventListener('focus', function () {
+            this.type = 'date'; // Дата с каруселью при фокусе
+        });
+        document.getElementById('date').addEventListener('blur', function () {
+            if (!this.value) {
+                this.type = 'text'; // Возвращаем тип в текст, если не выбрана дата
+            }
+        });
+
+        // Инициализация выбора времени с помощью встроенной функции браузера
+        document.getElementById('time').addEventListener('focus', function () {
+            this.type = 'time'; // Время с каруселью при фокусе
+        });
+        document.getElementById('time').addEventListener('blur', function () {
+            if (!this.value) {
+                this.type = 'text'; // Возвращаем тип в текст, если не выбрано время
+            }
         });
 
         document.getElementById('booking-form').addEventListener('submit', async function (e) {
