@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование столика</title>
+    <title>Бронювання купе</title>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="WAGON13">
@@ -129,25 +129,25 @@
     <div class="bgwagon"></div> <!-- Фон с размытим -->
 
     <form id="reservation-form">
-        <label for="name"><b>Ваше имя:</b></label>
-        <input type="text" id="name" name="name" required placeholder="Введите ваше имя">
+        <label for="name"><b>Ваше ім'я:</b></label>
+        <input type="text" id="name" name="name" required placeholder="Введіть ваше ім'я">
 
-        <label for="phone">Телефон:</label>
-        <input type="tel" id="phone" name="phone" required placeholder="Введите ваш телефон">
+        <label for="phone"><b>Телефон:</b></label>
+        <input type="tel" id="phone" name="phone" required placeholder="Введіть ваш телефон">
 
-        <label for="date">Дата бронирования:</label>
+        <label for="date"><b>Дата бронювання:</b></label>
         <input type="date" id="date" name="date" required>
 
-        <label for="time">Время бронирования:</label>
+        <label for="time"><b>Час прибуття:</b></label>
         <input type="time" id="time" name="time" required>
 
-        <label for="guests">Количество гостей:</label>
-        <input type="number" id="guests" name="guests" required min="1" placeholder="Количество гостей">
+        <label for="guests"><b>Кількість пасажирів:</b></label>
+        <input type="number" id="guests" name="guests" required min="1" placeholder="Введіть кількість пасажирів">
 
-        <label for="comments">Комментарии:</label>
-        <textarea id="comments" name="comments" rows="3" placeholder="Ваши комментарии..."></textarea>
+        <label for="comments"><b>Коментар для провідника:</b></label>
+        <textarea id="comments" name="comments" rows="3" placeholder="Ваш коментар...."></textarea>
 
-        <button type="submit">Забронировать</button>
+        <button type="submit">Забронювати купе</button>
     </form>
 
     <script>
@@ -171,13 +171,13 @@
 
             // Формируем текст сообщения для Telegram
             const message = `
-🔔 *Новый заказ на столик!*
-👤 Имя: ${name}
+🔔 *Нове бронювання!*
+👤 Ім'я: ${name}
 📞 Телефон: ${phone}
-📅 Дата бронирования: ${date}
-⏰ Время бронирования: ${time}
-👥 Количество гостей: ${guests}
-💬 Комментарии: ${comments}
+📅 Дата бронювання: ${date}
+⏰ Час прибуття: ${time}
+👥 Кількість пасажирів: ${guests}
+💬 Коментар: ${comments}
 `;
 
             // Отправляем сообщение в Telegram
@@ -199,7 +199,7 @@
                 const data = await response.json();
 
                 if (data.ok) {
-                    alert('Бронирование успешно отправлено!');
+                    alert('Бронювання купе успішне!');
                 } else {
                     console.error('Ошибка Telegram:', data);
                     alert('Ошибка при отправке. Проверьте консоль.');
