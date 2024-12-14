@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Бронирование столиков</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 20px;
+		}
+		.form-container {
+			max-width: 400px;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		.form-container h2 {
+			text-align: center;
+		}
+		.form-container input, .form-container select, .form-container button {
+			width: 100%;
+			padding: 10px;
+			margin: 10px 0;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		.notification {
+			background-color: #d4edda;
+			color: #155724;
+			padding: 15px;
+			margin: 20px 0;
+			border: 1px solid #c3e6cb;
+			border-radius: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div class="form-container">
+		<h2>Бронирование столика</h2>
+		<form id="bookingForm">
+			<label for="name">Имя:</label>
+			<input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+			
+			<label for="phone">Телефон:</label>
+			<input type="tel" id="phone" name="phone" placeholder="Введите ваш телефон" required>
+			
+			<label for="date">Дата бронирования:</label>
+			<input type="date" id="date" name="date" required>
+			
+			<label for="time">Время:</label>
+			<input type="time" id="time" name="time" required>
+			
+			<label for="guests">Количество гостей:</label>
+			<select id="guests" name="guests" required>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5+">5+</option>
+			</select>
+			
+			<button type="submit">Забронировать</button>
+		</form>
+	</div>
+
+	<div id="notifications"></div>
+
+	<script>
+		const bookingForm = document.getElementById('bookingForm');
+		const notificationsContainer = document.getElementById('notifications');
+
+		bookingForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+
+			// Получаем данные из формы
+			const name = document.getElementById('name').value;
+			const phone = document.getElementById('phone').value;
+			const date = document.getElementById('date').value;
+			const time = document.getElementById('time').value;
+			const guests = document.getElementById('guests').value;
+
+			// Генерируем уведомление
+			const notification = document.createElement('div');
+			notification.className = 'notification';
+			notification.innerHTML = `
+				<strong>Новый заказ!</strong><br>
+				Имя: ${name}<br>
+				Телефон: ${phone}<br>
+				Дата: ${date}<br>
+				Время: ${time}<br>
+				Гостей: ${guests}
+			`;
+
+			// Добавляем уведомление на страницу
+			notificationsContainer.appendChild(notification);
+
+			// Очистка формы
+			bookingForm.reset();
+
+			// Здесь можно отправить данные на сервер через fetch или axios
+			// fetch('/api/book-table', {
+			//     method: 'POST',
+			//     headers: { 'Content-Type': 'application/json' },
+			//     body: JSON.stringify({ name, phone, date, time, guests })
+			// });
+		});
+	</script>
+</body>
+</html>
