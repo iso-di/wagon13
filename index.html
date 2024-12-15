@@ -19,6 +19,7 @@
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -42,6 +43,16 @@
 
         .bgwagon.bg-blur {
             filter: blur(10px); /* Размытие фона */
+        }
+
+        .logo-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .logo-container img {
+            max-width: 100px; /* Ограничение по ширине */
+            height: auto;
         }
 
         form {
@@ -127,6 +138,10 @@
 <body>
 
     <div class="bgwagon"></div> <!-- Фон с размытим -->
+
+    <div class="logo-container">
+        <img src="logo.png" alt="Логотип WAGON13">
+    </div>
 
     <form id="reservation-form">
         <label for="name"><b>Ваше ім'я:</b></label>
